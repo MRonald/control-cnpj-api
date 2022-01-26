@@ -2,17 +2,19 @@
 
 namespace Mronald\ControlCnpjApi\Controllers;
 
-class CompanyController
+use Mronald\ControlCnpjApi\Models\Company;
+
+class CompanyController extends Controller
 {
-    private array $companies;
+    private Company $model;
 
     public function __construct()
     {
-        $this->companies = ['a', 'b'];
+        $this->model = new Company();
     }
 
     public function index(): void
     {
-        var_dump($this->companies);
+        $this->returnResult($this->model->all());
     }
 }

@@ -9,7 +9,7 @@
             "Mronald\\ControlCnpjApi\\": "src/"
         },
         "files": [
-            "src/config/Config.php"
+            "config/database.php"
         ]
     },
     "authors": [
