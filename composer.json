@@ -1,0 +1,17 @@
+{
+    "name": "mronald/control-cnpj-api",
+    "description": "API to controlling cnpj informations",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mronald\\ControlCnpjApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mronald",
+            "email": "ronaldmichael918@gmail.com"
+        }
+    ],
+    "require": {}
+}
