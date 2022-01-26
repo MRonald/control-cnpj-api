@@ -7,7 +7,10 @@
     "autoload": {
         "psr-4": {
             "Mronald\\ControlCnpjApi\\": "src/"
-        }
+        },
+        "files": [
+            "src/config/Config.php"
+        ]
     },
     "authors": [
         {
@@ -15,5 +18,7 @@
             "email": "ronaldmichael918@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "coffeecode/datalayer": "^1.1"
+    }
 }
