@@ -1,6 +1,8 @@
 {
     "name": "mronald/control-cnpj-api",
     "description": "API to controlling cnpj informations",
+    "minimum-stability": "stable",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
