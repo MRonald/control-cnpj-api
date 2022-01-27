@@ -17,4 +17,12 @@ class Company extends Model
             'corporate_name'
         ]);
     }
+
+    public function address(): CompanyAddress
+    {
+        return (new CompanyAddress)
+            ->find('company_id = :cId', 'cId=' . $this->id)
+            ->fetch(true)[0]
+            ?? new CompanyAddress;
+    }
 }

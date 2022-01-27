@@ -4,10 +4,12 @@ namespace Mronald\ControlCnpjApi\Controllers;
 
 abstract class Controller
 {
-    protected function returnAPIResult(array $result): void
+    protected function returnAPIResult(array $response, int $statusCode = 200): void
     {
         header('Content-Type: application/json');
-        echo json_encode($result);
+        http_response_code($statusCode);
+        echo json_encode($response);
+        die();
     }
 
     protected function bodyToObject()

@@ -3,6 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Mronald\ControlCnpjApi\Controllers\CompanyController;
+use Mronald\ControlCnpjApi\Models\CompanyAddress;
 
 const PREFIX = '/api/v1/companies';
 $controller = new CompanyController();
@@ -13,6 +14,13 @@ switch ($_SERVER['PATH_INFO']) {
         break;
     case PREFIX . '/create':
         $controller->store();
+        break;
+    case PREFIX . '/edit':
+        $controller->update();
+        break;
+    case PREFIX . '/teste':
+        $b = new CompanyAddress();
+        var_dump($b->all());
         break;
     default:
         echo 'Erro 404';

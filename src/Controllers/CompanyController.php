@@ -19,11 +19,11 @@ class CompanyController extends Controller
         $this->returnAPIResult($this->model->all());
     }
 
-    public function store()
+    public function store(): void
     {
         $data = $this->bodyToObject();
 
-        // // Criando e salvando objeto Company
+        // Criando e salvando objeto Company
         $company = new Company();
         $company->person_type = $data->person_type;
         $company->contributor_type = $data->contributor_type;
@@ -42,7 +42,7 @@ class CompanyController extends Controller
 
         // Criando e salvando CompanyAddress
         $companyAddress = new CompanyAddress();
-        $companyAddress->user_id = $company->id;
+        $companyAddress->company_id = $company->id;
         $companyAddress->zip_code = $data->address->zip_code;
         $companyAddress->public_place = $data->address->public_place;
         $companyAddress->number = $data->address->number;
@@ -60,6 +60,56 @@ class CompanyController extends Controller
         ];
 
         $this->returnAPIResult($response);
+    }
+
+    public function update(): void
+    {
+        $data = $this->bodyToObject();
+
+        $company = $this->model->getById($data->id);
+
+        if (!isset($company)) {
+            $company = $this->model->getByCpfCnpj($data->cpf_cnpj);
+        }
+
+        if (!isset($company)) {
+            $message = [
+                'message' => 'register not found',
+            ];
+            $this->returnAPIResult($message, 404);
+        }
+
+        // Editando e salvando Company
+        $company->person_type = $data->person_type;
+        $company->contributor_type = $data->contributor_type;
+        $company->register_type = $data->register_type;
+        $company->state = $data->state;
+        $company->state_registration = $data->state_registration;
+        $company->county_registration = $data->county_registration;
+        $company->corporate_name = $data->corporate_name;
+        $company->fantasy_name = $data->fantasy_name;
+        $company->main_phone = $data->main_phone;
+        $company->secondary_phone = $data->secondary_phone;
+        $company->email = $data->email;
+        $company->notes = $data->notes;
+        $company->save();
+
+        // Editando e salvando CompanyAddress
+        $companyAddress = $company->address();
+        $companyAddress->company_id = $company->id;
+        $companyAddress->zip_code = $data->address->zip_code;
+        $companyAddress->public_place = $data->address->public_place;
+        $companyAddress->number = $data->address->number;
+        $companyAddress->complement = $data->address->complement;
+        $companyAddress->district = $data->address->district;
+        $companyAddress->city = $data->address->city;
+        $companyAddress->country = $data->address->country;
+        $companyAddress->save();
+
+        $message = [
+            'message' => 'updated successfully',
+        ];
+        $this->returnAPIResult($message, 202);
     }
 
     private function validateRoles(Company $company): string

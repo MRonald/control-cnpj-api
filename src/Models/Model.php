@@ -34,17 +34,29 @@ abstract class Model extends DataLayer implements ModelContract
         die();
     }
 
-    protected function fetchToArray(array $fetchData): array
+    protected function fetchToArray(?array $fetchData): array
     {
         $result = [];
-        foreach ($fetchData as $data) {
-            $result[] = $data->data();
+        if (isset($fetchData)) {
+            foreach ($fetchData as $data) {
+                $result[] = $data->data();
+            }
         }
         return $result;
     }
 
     public function all(): array
     {
-        return $this->fetchToArray($this->find()->fetch(true) ?? []);
+        return $this->fetchToArray($this->find()->fetch(true));
+    }
+
+    public function getById(?string $id): ?self
+    {
+        return $this->findById(intval($id));
+    }
+
+    public function getByCpfCnpj(?string $cpfCnpj): ?self
+    {
+        return $this->find('cpf_cnpj = :dtStr', 'dtStr=' . $cpfCnpj)->fetch(true)[0];
     }
 }
