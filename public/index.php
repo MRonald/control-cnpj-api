@@ -12,7 +12,7 @@ $jwtAuth = new JWTAuth();
 if ($_SERVER['PATH_INFO'] === PREFIX . '/login') {
     $jwtAuth->login();
 }
-echo $_SERVER['PATH_INFO'];
+
 $jwtAuth->testLogin();
 
 $companyController = new CompanyController();

@@ -4,9 +4,8 @@ namespace Mronald\ControlCnpjApi\Models;
 
 use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\DataLayer\DataLayer;
-use Mronald\ControlCnpjApi\Contracts\ModelContract;
 
-abstract class Model extends DataLayer implements ModelContract
+abstract class Model extends DataLayer
 {
     public function __construct(string $tableName, array $requiredFields, string $primaryKey = 'id', bool $timestamps = false)
     {
