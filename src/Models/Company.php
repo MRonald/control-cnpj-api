@@ -2,6 +2,8 @@
 
 namespace Mronald\ControlCnpjApi\Models;
 
+use stdClass;
+
 class Company extends Model
 {
     public function __construct()
@@ -10,20 +12,9 @@ class Company extends Model
             'person_type',
             'contributor_type',
             'register_type',
-            'cnpj',
+            'cpf_cnpj',
             'state',
-            'corporate_name',
-            'address_id',
+            'corporate_name'
         ]);
-    }
-
-    public function all(): array
-    {
-        $findResult = $this->find()->fetch(true);
-        $companies = [];
-        foreach ($findResult as $company) {
-            $companies[] = $company->data();
-        }
-        return $companies;
     }
 }

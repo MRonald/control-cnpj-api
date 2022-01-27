@@ -33,4 +33,18 @@ abstract class Model extends DataLayer implements ModelContract
         echo $error->getMessage();
         die();
     }
+
+    protected function fetchToArray(array $fetchData): array
+    {
+        $result = [];
+        foreach ($fetchData as $data) {
+            $result[] = $data->data();
+        }
+        return $result;
+    }
+
+    public function all(): array
+    {
+        return $this->fetchToArray($this->find()->fetch(true) ?? []);
+    }
 }
