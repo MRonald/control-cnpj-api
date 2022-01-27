@@ -2,24 +2,33 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Mronald\ControlCnpjApi\Auth\JWTAuth;
 use Mronald\ControlCnpjApi\Controllers\CompanyController;
-use Mronald\ControlCnpjApi\Models\CompanyAddress;
 
 const PREFIX = '/api/v1/companies';
-$controller = new CompanyController();
+
+$jwtAuth = new JWTAuth();
+
+if ($_SERVER['PATH_INFO'] === PREFIX . '/login') {
+    $jwtAuth->login();
+}
+
+$jwtAuth->testLogin();
+
+$companyController = new CompanyController();
 
 switch ($_SERVER['PATH_INFO']) {
     case PREFIX . '/list':
-        $controller->index();
+        $companyController->index();
         break;
     case PREFIX . '/create':
-        $controller->store();
+        $companyController->store();
         break;
     case PREFIX . '/edit':
-        $controller->update();
+        $companyController->update();
         break;
     case PREFIX . '/delete':
-        $controller->destroy();
+        $companyController->destroy();
         break;
     default:
         echo 'Erro 404';

@@ -69,8 +69,10 @@ abstract class Model extends DataLayer implements ModelContract
 
         $fetchResult =  $this->find($terms, $params)->fetch(true);
         $response = [];
-        foreach ($fetchResult as $result) {
-            $response[] = $result->data();
+        if (isset($fetchResult)) {
+            foreach ($fetchResult as $result) {
+                $response[] = $result->data();
+            }
         }
         return $response;
     }

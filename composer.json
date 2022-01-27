@@ -9,7 +9,8 @@
             "Mronald\\ControlCnpjApi\\": "src/"
         },
         "files": [
-            "config/database.php"
+            "config/database.php",
+            "config/auth.php"
         ]
     },
     "authors": [
@@ -19,6 +20,7 @@
         }
     ],
     "require": {
-        "coffeecode/datalayer": "^1.1"
+        "coffeecode/datalayer": "^1.1",
+        "firebase/php-jwt": "^6.0"
     }
 }
