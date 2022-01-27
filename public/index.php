@@ -18,6 +18,9 @@ switch ($_SERVER['PATH_INFO']) {
     case PREFIX . '/edit':
         $controller->update();
         break;
+    case PREFIX . '/delete':
+        $controller->destroy();
+        break;
     default:
         echo 'Erro 404';
 }

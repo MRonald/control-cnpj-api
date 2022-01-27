@@ -112,6 +112,29 @@ class CompanyController extends Controller
         $this->returnAPIResult($message, 202);
     }
 
+    public function destroy()
+    {
+        $data = $this->bodyToObject();
+
+        $company = $this->model->getById($data->id);
+
+        if (!isset($company)) {
+            $message = [
+                'message' => 'register not found',
+            ];
+            $this->returnAPIResult($message, 404);
+        }
+
+        $companyAddress = $company->address();
+        $companyAddress->destroy();
+        $company->destroy();
+
+        $message = [
+            'message' => 'deleted successfully',
+        ];
+        $this->returnAPIResult($message, 202);
+    }
+
     private function validateRoles(Company $company): string
     {
         $message = '';
