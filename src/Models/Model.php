@@ -45,11 +45,6 @@ abstract class Model extends DataLayer implements ModelContract
         return $result;
     }
 
-    public function all(): array
-    {
-        return $this->fetchToArray($this->find()->fetch(true));
-    }
-
     public function getById(?string $id): ?self
     {
         return $this->findById(intval($id));
@@ -58,5 +53,29 @@ abstract class Model extends DataLayer implements ModelContract
     public function getByCpfCnpj(?string $cpfCnpj): ?self
     {
         return $this->find('cpf_cnpj = :dtStr', 'dtStr=' . $cpfCnpj)->fetch(true)[0];
+    }
+
+    public function filteredRecords(array $filters): array
+    {
+        $terms = '';
+        $params = '';
+        $first = true;
+        foreach ($filters as $key => $value) {
+            if ($first) {
+                $terms .= $key . ' = :' . $key;
+                $params .= $key . '=' . $value;
+                $first = false;
+            } else {
+                $terms .= ' AND ' . $key . ' = :' . $key;
+                $params .= '&' . $key . '=' . $value;
+            }
+        }
+
+        $fetchResult =  $this->find($terms, $params)->fetch(true);
+        $response = [];
+        foreach ($fetchResult as $result) {
+            $response[] = $result->data();
+        }
+        return $response;
     }
 }

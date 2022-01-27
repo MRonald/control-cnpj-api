@@ -18,10 +18,6 @@ switch ($_SERVER['PATH_INFO']) {
     case PREFIX . '/edit':
         $controller->update();
         break;
-    case PREFIX . '/teste':
-        $b = new CompanyAddress();
-        var_dump($b->all());
-        break;
     default:
         echo 'Erro 404';
 }

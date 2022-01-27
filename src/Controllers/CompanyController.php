@@ -16,7 +16,7 @@ class CompanyController extends Controller
 
     public function index(): void
     {
-        $this->returnAPIResult($this->model->all());
+        $this->returnAPIResult($this->model->filteredRecords($_GET));
     }
 
     public function store(): void
