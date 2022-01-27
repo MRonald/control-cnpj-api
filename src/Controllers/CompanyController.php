@@ -4,6 +4,7 @@ namespace Mronald\ControlCnpjApi\Controllers;
 
 use Mronald\ControlCnpjApi\Models\Company;
 use Mronald\ControlCnpjApi\Models\CompanyAddress;
+use Mronald\ControlCnpjApi\Validators\CompanyValidator;
 
 class CompanyController extends Controller
 {
@@ -38,6 +39,10 @@ class CompanyController extends Controller
         $company->secondary_phone = $data->secondary_phone;
         $company->email = $data->email;
         $company->notes = $data->notes;
+
+        $companyValidator = new CompanyValidator($company);
+        $companyValidator->validate();
+
         $company->save();
 
         // Criando e salvando CompanyAddress
