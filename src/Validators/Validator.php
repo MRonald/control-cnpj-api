@@ -13,16 +13,6 @@ abstract class Validator implements ValidatorContract
         }
     }
 
-    public function validate(): void
-    {
-        $this->handle();
-    }
-
-    protected function handle(): void
-    {
-        // Validations
-    }
-
     private function failValidation(string $response): void
     {
         header('Content-Type: application/json');

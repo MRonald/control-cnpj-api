@@ -13,7 +13,7 @@ class CompanyValidator extends Validator
         $this->company = $company;
     }
 
-    public function handle(): void
+    public function validate(): void
     {
         // Validations
         parent::required($this->company->person_type, 'person_type');

@@ -4,6 +4,7 @@ namespace Mronald\ControlCnpjApi\Controllers;
 
 use Mronald\ControlCnpjApi\Models\Company;
 use Mronald\ControlCnpjApi\Models\CompanyAddress;
+use Mronald\ControlCnpjApi\Validators\CompanyAddressValidator;
 use Mronald\ControlCnpjApi\Validators\CompanyValidator;
 
 class CompanyController extends Controller
@@ -55,6 +56,10 @@ class CompanyController extends Controller
         $companyAddress->district = $data->address->district;
         $companyAddress->city = $data->address->city;
         $companyAddress->country = $data->address->country;
+
+        $companyAddressValidator = new CompanyAddressValidator($companyAddress);
+        $companyAddressValidator->validate();
+
         $companyAddress->save();
 
         $message = $this->validateRoles($company);
@@ -97,6 +102,10 @@ class CompanyController extends Controller
         $company->secondary_phone = $data->secondary_phone;
         $company->email = $data->email;
         $company->notes = $data->notes;
+
+        $companyValidator = new CompanyValidator($company);
+        $companyValidator->validate();
+
         $company->save();
 
         // Editando e salvando CompanyAddress
@@ -109,6 +118,10 @@ class CompanyController extends Controller
         $companyAddress->district = $data->address->district;
         $companyAddress->city = $data->address->city;
         $companyAddress->country = $data->address->country;
+
+        $companyAddressValidator = new CompanyAddressValidator($companyAddress);
+        $companyAddressValidator->validate();
+
         $companyAddress->save();
 
         $message = [

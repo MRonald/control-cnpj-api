@@ -13,7 +13,7 @@ class CompanyAddressValidator extends Validator
         $this->companyAddress = $companyAddress;
     }
 
-    public function handle(): void
+    public function validate(): void
     {
         // Validations
         parent::required($this->companyAddress->zip_code, 'zip_code');
